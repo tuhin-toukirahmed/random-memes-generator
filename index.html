@@ -4,96 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Meme Generator</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 20px;
-        padding: 0;
-        background-color: #f8f9fa;
-      }
-      img {
-        max-width: 90%;
-        height: auto;
-        margin-top: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-      button {
-        padding: 12px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        border: none;
-        background-color: #007bff;
-        color: white;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-        margin: 10px;
-      }
-      button:hover {
-        background-color: #0056b3;
-      }
-
-      @media (max-width: 600px) {
-        body {
-          margin: 10px;
-        }
-        button {
-          width: 100%;
-          font-size: 14px;
-        }
-        img {
-          max-width: 100%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Random Meme Generator</h1>
-    <button id="language-toggle">Switch to Bengali</button>
-    <button id="generate">Generate New Meme</button>
-    <br />
-    <img id="meme" src="" alt="Random Meme" />
+    <div id="main">
+      <h1>Random Meme Generator</h1>
+      <button id="language-toggle">Switch to Bengali</button>
+      <button id="generate">Generate New Meme</button>
+      <br />
+      <img id="meme" src="" alt="Random Meme" />
+    </div>
 
-    <script>
-      const memeImg = document.getElementById("meme");
-      const generateBtn = document.getElementById("generate");
-      const languageToggleBtn = document.getElementById("language-toggle");
-      let language = "en"; // Default language
-
-      async function fetchMeme() {
-        try {
-          let apiUrl;
-          if (language === "en") {
-            apiUrl = "https://meme-api.com/gimme";
-          } else {
-            apiUrl =
-              "https://api.tenor.com/v1/random?q=bengali+memes&key=LIVDSRZULELA&limit=1";
-          }
-
-          const response = await fetch(apiUrl);
-          const data = await response.json();
-
-          if (language === "en") {
-            memeImg.src = data.url;
-          } else {
-            memeImg.src = data.results[0].media[0].gif.url;
-          }
-        } catch (error) {
-          console.error("Error fetching meme:", error);
-        }
-      }
-
-      generateBtn.addEventListener("click", fetchMeme);
-
-      languageToggleBtn.addEventListener("click", () => {
-        language = language === "en" ? "bn" : "en";
-        languageToggleBtn.textContent =
-          language === "en" ? "Switch to Bengali" : "Switch to English";
-        fetchMeme();
-      });
-
-      fetchMeme(); // Load an initial meme
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
